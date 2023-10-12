@@ -12,15 +12,12 @@ export class WebSocketService {
     this.socket$.pipe().subscribe();
   }
 
-  // // Écoutez les messages entrants
-  // onMessage(callback: (message: any) => void) {
-  //   this.socket.onmessage = (event) => {
-  //     const data = JSON.parse(event.data);
-  //     callback(data);
-  //   };
-  // }
-
   sendMessage(message: any) {
     this.socket$.next(message);
+  }
+
+  // Méthode pour s'abonner aux messages du backend
+  receiveMessage() {
+    return this.socket$.asObservable();
   }
 }
