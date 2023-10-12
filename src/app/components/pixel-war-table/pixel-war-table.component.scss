@@ -1,5 +1,3 @@
-/* pixel-war-table.component.scss */
-
 .popup {
   position: absolute;
   top: 50%;
@@ -10,7 +8,7 @@
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 300px; /* Largeur de la div */
+  width: 300px;
   text-align: center;
 }
 
@@ -26,15 +24,15 @@ label {
 }
 
 input[type="color"] {
-  width: 100px; /* Largeur du champ de couleur */
-  height: 30px; /* Hauteur du champ de couleur */
+  width: 100px;
+  height: 30px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 button {
   margin-top: 10px;
-  background-color: #007BFF; /* Couleur du bouton */
+  background-color: #007BFF;
   color: white;
   border: none;
   border-radius: 5px;
@@ -43,7 +41,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3; /* Couleur du bouton au survol */
+  background-color: #0056b3;
 }
 
 .mouse-coordinates {
@@ -67,4 +65,3 @@ button:hover {
   font-size: 28px;
   color: red;
 }
-

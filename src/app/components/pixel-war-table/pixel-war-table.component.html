@@ -16,7 +16,6 @@
   <div class="close-icon" (click)="closePopup()" style="cursor: pointer">
     &times;
   </div>
-  <!-- Icône pour fermer la popup -->
   <form (submit)="submitForm()">
     <label for="color">Couleur (RGB) :</label>
     <input type="color" id="color" (input)="updateColor($event)" required />
