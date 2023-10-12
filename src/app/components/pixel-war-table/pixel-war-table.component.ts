@@ -7,20 +7,23 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
   styleUrls: ['./pixel-war-table.component.scss'],
 })
 export class PixelWarTableComponent implements OnInit {
-  @ViewChild('canvasPixel', { static: true }) myCanvas!: ElementRef;
+  @ViewChild('canvasPixel', { static: true }) myCanvas!: ElementRef; // Canvas
   cellSize = 10; // Taille d'une cellule
-  cellsOccupied: Set<string> = new Set();
+  cellsOccupied: Set<string> = new Set(); // Ensemble des cellules occupées
 
-  showPopup = false;
-  selectedX: number = 0;
-  selectedY: number = 0;
+  showPopup = false; // popup de validation fermé par défaut
+  selectedX: number = 0; // X par défaut
+  selectedY: number = 0; // Y par défaut
   selectedColor = '#000000'; // Couleur par défaut
   receivedPixels: any[] = []; // Tableau pour stocker les pixels reçus
 
-  mouseOnCell: { x: number; y: number } = { x: -1, y: -1 };
+  mouseOnCell: { x: number; y: number } = { x: 0, y: 0 }; // Cellule survolée par la souris
 
   constructor(private webSocketService: WebSocketService) {}
 
+  /**
+   * Effectue des actions lors de l'initialisation du composant.
+   */
   ngOnInit(): void {
     const dataToSend = {
       type: 'getAllPixels',
@@ -34,6 +37,9 @@ export class PixelWarTableComponent implements OnInit {
     });
   }
 
+  /**
+   * Gère l'événement de clic sur le canvas.
+   */
   canvasClicked(event: MouseEvent) {
     const canvas = this.myCanvas.nativeElement;
     const rect = canvas.getBoundingClientRect();
@@ -52,11 +58,17 @@ export class PixelWarTableComponent implements OnInit {
     }
   }
 
+  /**
+   * Met à jour la couleur sélectionnée en fonction de l'input de couleur.
+   */
   updateColor(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     this.selectedColor = inputElement.value;
   }
 
+  /**
+   * Soumet le formulaire pour ajouter un pixel.
+   */
   submitForm() {
     // Gestion de l'action à effectuer lors de la soumission du formulaire
     const dataToSend = {
@@ -75,7 +87,9 @@ export class PixelWarTableComponent implements OnInit {
     this.selectedY = 0;
   }
 
-  // Dessiner les pixels reçus sur le canvas
+  /**
+   * Dessine les pixels reçus sur le canvas.
+   */
   drawReceivedPixels() {
     const canvas = this.myCanvas.nativeElement;
     const context = canvas.getContext('2d');
@@ -89,6 +103,9 @@ export class PixelWarTableComponent implements OnInit {
     });
   }
 
+  /**
+   * Gère l'événement de survol d'une cellule du canvas.
+   */
   onCellHover(event: MouseEvent) {
     const canvas = this.myCanvas.nativeElement;
     const rect = canvas.getBoundingClientRect();
@@ -101,6 +118,9 @@ export class PixelWarTableComponent implements OnInit {
     this.mouseOnCell = { x: cellX, y: cellY };
   }
 
+  /**
+   * Ferme la fenêtre contextuelle du formulaire.
+   */
   closePopup() {
     this.showPopup = false;
     // Réinitialisez les valeurs si nécessaire
