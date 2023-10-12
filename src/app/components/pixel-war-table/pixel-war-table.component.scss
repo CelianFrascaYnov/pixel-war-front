@@ -45,3 +45,26 @@ button {
 button:hover {
   background-color: #0056b3; /* Couleur du bouton au survol */
 }
+
+.mouse-coordinates {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.close-icon {
+  font-size: 28px;
+  color: black;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.close-icon:hover {
+  font-size: 28px;
+  color: red;
+}
+
