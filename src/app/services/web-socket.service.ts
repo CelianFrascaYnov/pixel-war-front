@@ -1,45 +1,26 @@
 import { Injectable } from '@angular/core';
+import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WebSocketService {
-  private socket: WebSocket;
+  private socket$: WebSocketSubject<any>;
 
   constructor() {
-    this.socket = new WebSocket('ws://localhost:8080/ws');
-
-    this.socket.onerror = (error) => {
-      console.error('WebSocket error:', error);
-    };
-
-    this.socket.onclose = (event) => {
-      if (event.wasClean) {
-        console.log(
-          'WebSocket connection closed cleanly, code:',
-          event.code,
-          'reason:',
-          event.reason
-        );
-      } else {
-        console.error('WebSocket connection abruptly closed.');
-      }
-    };
+    this.socket$ = webSocket('ws://localhost:8080/ws'); // Remplacez l'URL par votre URL WebSocket
+    this.socket$.pipe().subscribe();
   }
 
-  // Écoutez les messages entrants
-  onMessage(callback: (message: any) => void) {
-    this.socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      callback(data);
-    };
-  }
+  // // Écoutez les messages entrants
+  // onMessage(callback: (message: any) => void) {
+  //   this.socket.onmessage = (event) => {
+  //     const data = JSON.parse(event.data);
+  //     callback(data);
+  //   };
+  // }
 
   sendMessage(message: any) {
-    if (this.socket.readyState === WebSocket.OPEN) {
-      this.socket.send(JSON.stringify(message));
-    } else {
-      console.error('WebSocket connection is not open.');
-    }
+    this.socket$.next(message);
   }
 }

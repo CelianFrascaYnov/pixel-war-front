@@ -1,0 +1,17 @@
+<!-- pixel-war-table.component.html -->
+<canvas
+  #canvasPixel
+  style="border: 1px solid"
+  width="1000"
+  height="700"
+  (click)="canvasClicked($event)"
+></canvas>
+
+<div class="popup" *ngIf="showPopup">
+  <form (submit)="submitForm()">
+    <label for="color">Couleur (RGB) :</label>
+    <input type="color" id="color" (input)="updateColor($event)" required />
+
+    <button type="submit">Valider</button>
+  </form>
+</div>
