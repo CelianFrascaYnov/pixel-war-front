@@ -1,0 +1,25 @@
+<canvas
+  #canvasPixel
+  style="border: 1px solid"
+  width="1000"
+  height="700"
+  (click)="canvasClicked($event)"
+  (mousemove)="onCellHover($event)"
+>
+</canvas>
+
+<div class="mouse-coordinates">
+  Position: X {{ mouseOnCell.x }}, Y {{ mouseOnCell.y }}
+</div>
+
+<div class="popup" *ngIf="showPopup">
+  <div class="close-icon" (click)="closePopup()" style="cursor: pointer">
+    &times;
+  </div>
+  <form (submit)="submitForm()">
+    <label for="color">Couleur (RGB) :</label>
+    <input type="color" id="color" (input)="updateColor($event)" required />
+
+    <button type="submit">Valider</button>
+  </form>
+</div>
